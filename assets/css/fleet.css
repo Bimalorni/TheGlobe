@@ -1,0 +1,38 @@
+#right-inner-panel {
+    height: 100%;
+
+}
+#fleet-info {
+    width: 80%;
+    height: 50%;
+}
+.canvasjs-chart-credit {
+    display: none;
+}
+#footer-text {
+    position:absolute;
+    bottom: 0px;
+    left: calc(50vw - 220px);
+}
+
+#top-fleets-view-card {
+	border-radius: 0;
+	position: absolute;
+	left: 80px;
+	top: 121px;
+	width: 300px
+}
+#regular-fleets-view-card {
+    border-radius: 0;
+    position: absolute;
+    left: 80px;
+    top: 160px;
+    width: 300px
+}
+
+#view-top-fleets-card-btn i {
+	color: #FFFF00
+}
+#view-regular-fleets-card-btn i {
+	color: #0EB1FF
+}

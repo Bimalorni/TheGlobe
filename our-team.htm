@@ -1,0 +1,716 @@
+<html
+  lang="en-us"
+  class="esriLtr jimu-ltr en-us en scrollable size-mode-LARGE"
+  style="--vh: 9.31px; --vw: 10px"
+  dir="ltr"
+>
+  <head>
+    <link
+      id="jimu-base-style"
+      rel="stylesheet"
+      type="text/css"
+      href="https://experience.arcgis.com/experience/../cdn/2177/jimu-theme/base/base.css"
+    />
+    <link rel="shortcut icon" href="assets/icons/exb.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <link href="./assets/css/common.css" rel="stylesheet" />
+    <link href="./assets/css/our-team.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+    <title>The Globe | Teams</title>
+    <link rel="shortcut icon" href="assets/exb.ico" />
+    <!-- <base href="/cdn/2177/experience/"> -->
+    <!-- <base href="https://experience.arcgis.com/experience/"> -->
+    <style>
+      html {
+        scrollbar-color: var(--light-600) var(--light-200);
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+      html.scrollable {
+        overflow: auto;
+      }
+      html.scrollable body {
+        overflow: unset;
+      }
+      html.scrollable body,
+      html.scrollable #app {
+        height: auto;
+      }
+      #loading {
+        width: 100vw;
+        height: 100vh;
+      }
+      #app {
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+    </style>
+    <script type="empty">
+      /**
+               Add this empty script tag can help API module load find the correct "insertPointSibling"
+               */
+    </script>
+    <style id="mttstyle">
+      #mttContainer {
+        left: 0 !important;
+        top: 0 !important;
+        width: 1000px !important;
+        margin-left: -500px !important;
+        position: fixed !important;
+        z-index: 100000200 !important;
+        background: none !important;
+        pointer-events: none !important;
+        display: inline-block !important;
+      }
+      .bootstrapiso .tooltip {
+        width: auto !important;
+        height: auto !important;
+        background: none !important;
+        border: none !important;
+        border-radius: 0px !important;
+        visibility: visible !important;
+        pointer-events: none !important;
+      }
+      .bootstrapiso .bs-tooltip-top {
+        margin-bottom: 5px !important;
+      }
+      .bootstrapiso .bs-tooltip-bottom {
+        margin-top: 5px !important;
+      }
+      .bootstrapiso .tooltip-inner {
+        font-size: 14px !important;
+        max-width: 200px !important;
+        text-align: center !important;
+        backdrop-filter: blur(2px) !important;
+        background-color: #000000b8 !important;
+        color: #ffffffff !important;
+        pointer-events: auto;
+      }
+      .bootstrapiso .arrow::before {
+        border-top-color: #000000b8 !important;
+      }
+      .bootstrapiso .arrow {
+        font-size: 14px !important;
+        margin: auto !important;
+      }
+      .bootstrapiso .arrow::after {
+        display: none !important;
+      }
+      .ocr_text_div {
+        position: absolute;
+        opacity: 0.7;
+        font-size: calc(100% + 1cqw);
+        overflow: hidden;
+        border: 2px solid CornflowerBlue;
+        color: transparent !important;
+        background: none !important;
+      }
+    </style>
+    <style data-emotion="app-root-emotion-cache-ltr-global" data-s=""></style>
+    <style data-emotion="app-root-emotion-cache-ltr" data-s=""></style>
+    <meta name="title" content="Teams 2 | The_Globe_v2.2" />
+    <meta name="description" content="null" />
+    <meta
+      name="keywords"
+      content="EXB Experience,JavaScript,publishVersion:1.11.0,Ready To Use,status: Published,version:1.11.0,Web Application,Web Experience,Web Mapping Application,Web Page,Web Site"
+    />
+    <link
+      rel="image_src"
+      href="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/info/thumbnail/blob.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@arcgisonline" />
+    <meta name="twitter:title" content="Teams 2 | The_Globe_v2.2" />
+    <meta name="twitter:description" content="null" />
+    <meta
+      name="twitter:image"
+      content="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/info/thumbnail/blob.png"
+    />
+    <meta property="og:title" content="Teams 2 | The_Globe_v2.2" />
+    <meta property="og:description" content="null" />
+    <meta
+      property="og:image"
+      content="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/info/thumbnail/blob.png"
+    />
+  </head>
+  <body>
+    <div id="loading" style="display: none">
+      <style>
+        .loading-content {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+        .jimu-primary-loading:before,
+        .jimu-primary-loading:after {
+          position: absolute;
+          top: 0;
+          content: "";
+        }
+        .jimu-primary-loading:before {
+          left: -19.992px;
+        }
+        .jimu-primary-loading:after {
+          left: 19.992px;
+          -webkit-animation-delay: 0.32s !important;
+          animation-delay: 0.32s !important;
+        }
+        .jimu-primary-loading:before,
+        .jimu-primary-loading:after,
+        .jimu-primary-loading {
+          background: #076fe5;
+          -webkit-animation: loading-keys-app-loading 0.8s infinite ease-in-out;
+          animation: loading-keys-app-loading 0.8s infinite ease-in-out;
+          width: 13.6px;
+          height: 32px;
+        }
+        .jimu-primary-loading {
+          text-indent: -9999em;
+          margin: auto;
+          position: absolute;
+          right: calc(50% - 6.8px);
+          top: calc(50% - 16px);
+          -webkit-animation-delay: 0.16s !important;
+          animation-delay: 0.16s !important;
+        }
+        @-webkit-keyframes loading-keys-app-loading {
+          0%,
+          80%,
+          100% {
+            opacity: 0.75;
+            box-shadow: 0 0 #076fe5;
+            height: 32px;
+          }
+          40% {
+            opacity: 1;
+            box-shadow: 0 -8px #076fe5;
+            height: 40px;
+          }
+        }
+        @keyframes loading-keys-app-loading {
+          0%,
+          80%,
+          100% {
+            opacity: 0.75;
+            box-shadow: 0 0 #076fe5;
+            height: 32px;
+          }
+          40% {
+            opacity: 1;
+            box-shadow: 0 -8px #076fe5;
+            height: 40px;
+          }
+        }
+      </style>
+      <div class="loading-content">
+        <div class="justify-content-center jimu-primary-loading"></div>
+      </div>
+    </div>
+    <div id="app" style="display: block">
+      <div class="app-root-emotion-cache-ltr-10j3kwe"></div>
+      <div
+        class="page-renderer d-flex flex-column app-root-emotion-cache-ltr-2yd9h"
+        data-testid="pageRenderer"
+      >
+        <div
+          id="page_3"
+          data-pageid="page_3"
+          class="page app-root-emotion-cache-ltr-jpit63"
+        >
+          <div
+            class="layout flow-layout w-100 w-100 flex-grow-1 app-root-emotion-cache-ltr-5xlqu4"
+            data-layoutid="layout_115"
+            style="
+              padding: 0px;
+              border-radius: 0px;
+              justify-content: flex-start;
+              align-items: stretch;
+              position: relative;
+            "
+          >
+            <div
+              class="layout-animation trail-container d-flex flex-column align-items-center app-root-emotion-cache-ltr-vrj1me"
+              data-layoutid="layout_115"
+            >
+              <div
+                class="bg-black p-3 w-100 text-center text-white"
+                style="border-bottom: 2px solid grey"
+              >
+                <h1 class="my-2">
+                  <strong
+                    >Greening and Sustainability Team staff biographies</strong
+                  >
+                </h1>
+              </div>
+              <div class="w-100 text-center bg-pg-dark py-2">
+                <img
+                  src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_180/1669885378575.png"
+                  style="width: 50%"
+                />
+              </div>
+
+              <div class="bg-pg-dark text-white py-2">
+                <div class="w-80 mx-auto pt-3">
+                  <div class="w-100 d-flex mx-auto">
+                    <div class="w-50 d-flex justify-content-center">
+                      <img
+                        class="portrait"
+                        src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_188/1669883714302.jpg"
+                      />
+                    </div>
+                    <div class="w-50 d-flex justify-content-center">
+                      <img
+                        class="portrait"
+                        src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_191/1669883944255.jpg"
+                      />
+                    </div>
+                  </div>
+                  <div class="d-flex w-100 mx-auto pt-3 pb-4 px-2">
+                    <div class="w-50">
+                      <div class="text-center fs-4 fw-500 mb-3">
+                        Nono Louise Elisabeth Harhoff
+                      </div>
+                      <div class="fs-6 w-50 mx-auto">
+                        <p>
+                          Nono is a Senior Business Analyst in the Greening and
+                          Sustainability Team.
+                        </p>
+                        <p>
+                          She leads and provides strategic direction to the
+                          Green Data and Green Practice teams, as well as
+                          overall strategic business analysis for the wider
+                          Greening and Sustainability Team.
+                        </p>
+                        <p>Email: harhoff@unhcr.org</p>
+                      </div>
+                    </div>
+                    <div class="w-50">
+                      <div class="text-center fs-4 fw-500 mb-3">
+                        Cleo Forster
+                      </div>
+                      <div class="fs-6 w-50 mx-auto">
+                        <p>
+                          Cleo is the Green Finance Facility Project
+                          Coordinator.
+                        </p>
+                        <p>
+                          She leads and provides strategic direction to the
+                          Energy team. She ensures project delivery and
+                          implementation of the Green Finance Facility project,
+                          including solarization, driving technical inputs and
+                          coordination of competitive procurement processes of
+                          the Green Finance Facility.
+                        </p>
+                        <p>Email: forster@unhcr.org</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <p class="mb-0 p-1" style="text-align: center">
+                  <span
+                    style="
+                      font-size: 1.5rem;
+                      font-family: Arial;
+                      color: #050505;
+                    "
+                    >Green Data Team</span
+                  >
+                </p>
+              </div>
+              <div class="w-100 bg-black text-white">
+                <div class="w-80 pt-3 d-flex justify-content-around mx-auto">
+                  <div>
+                    <img
+                      class="portrait"
+                      src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_277/1669884696128.jpg"
+                    />
+                  </div>
+
+                  <div>
+                    <img
+                      class="portrait"
+                      src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_280/1669884933420.jpg"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      class="portrait"
+                      src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_283/1670489894687.png"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      class="portrait"
+                      src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_468/1675348235149.jpeg"
+                    />
+                  </div>
+                </div>
+                <div class="d-flex w-80 mx-auto pt-3 pb-4">
+                  <div class="w-25">
+                    <div class="text-center fs-4 fw-500 mb-3">Adam Fifield</div>
+                    <div class="fs-6">
+                      <p>
+                        Adam is the Green Data Coordinator of the Green Data
+                        team.
+                      </p>
+                      <p>
+                        He leads the Green Data team. He is leading the
+                        development of a cloud-based platform for gathering and
+                        analyzing greening and sustainability data for UNHCR.
+                      </p>
+                      <p>Email: fifield@unhcr.org</p>
+                    </div>
+                  </div>
+                  <div class="w-25">
+                    <div class="text-center fs-4 fw-500 mb-3">
+                      Istvan Gajdos
+                    </div>
+                    <div class="fs-6">
+                      <p>
+                        Istvan is a Building Services Associate in the Green
+                        Data team.
+                      </p>
+                      <p>
+                        He is the project lead for Green Boxes (energy meters),
+                        supporting the installation of new Boxes and maintenance
+                        of installed Boxes.
+                      </p>
+                      <p>Email: Otieno@unhcr.org</p>
+                    </div>
+                  </div>
+                  <div class="w-25">
+                    <div class="text-center fs-4 fw-500 mb-3">
+                      Marc Lundwall
+                    </div>
+                    <div class="fs-6">
+                      <p>
+                        Marc is a Research and Data Specialist in the Green Data
+                        team.
+                      </p>
+                      <p>
+                        He works on data collection and analysis for the
+                        Greening the Blue survey as well as communication with
+                        UNHCR country teams. He supports the development of the
+                        cloud-based data platform.
+                      </p>
+                      <p>Email: Lundwall@unhcr.org</p>
+                    </div>
+                  </div>
+                  <div class="w-25">
+                    <div class="text-center fs-4 fw-500 mb-3">
+                      Beatrice Malorni
+                    </div>
+                    <div class="fs-6">
+                      <p>
+                        Beatrice is a data analytics consultant working in the
+                        Green Data team.
+                      </p>
+                      <p>
+                        She leads data visualization for the Green Data team,
+                        developing products aimed at data-driven storytelling
+                        about UNHCR’s environmental footprint.
+                      </p>
+                      <p>Email: malorni@unhcr.org</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white p-1">
+                <h4>Green Energy Team</h4>
+              </div>
+
+              <div class="bg-dark text-white py-2">
+                <div class="w-80 mx-auto bg-black pt-3">
+                  <div class="w-80 d-flex justify-content-around mx-auto">
+                    <div>
+                      <img
+                        class="portrait"
+                        src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_301/1669887071265.jpg"
+                      />
+                    </div>
+                    <div>
+                      <img
+                        class="portrait"
+                        src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_314/1669887697465.jpg"
+                      />
+                    </div>
+                    <div>
+                      <img
+                        class="portrait"
+                        src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_312/1669887558215.jpg"
+                      />
+                    </div>
+                    <div>
+                      <img class="portrait" src="./assets/img/momani.jpg" />
+                    </div>
+                  </div>
+                  <div class="d-flex w-80 mx-auto pt-3 pb-4 px-2">
+                    <div class="w-25">
+                      <div class="text-center fs-4 fw-500 mb-3">
+                        Isahac Esteve
+                      </div>
+                      <div class="fs-6">
+                        <p>
+                          Isahac is a Renewable Energy Specialist and an Energy
+                          Officer in the Greening and Sustainability Team.
+                        </p>
+                        <p>
+                          He supports rollout of the Green Box project, conducts
+                          energy audits, and develops and validates
+                          energy-related business cases for UNHCR offices. He
+                          provides support across other departments in emissions
+                          calculations and verification.
+                        </p>
+                        <p>Email: esteve@unhcr.org</p>
+                      </div>
+                    </div>
+                    <div class="w-25">
+                      <div class="text-center fs-4 fw-500 mb-3">
+                        Timothy Whitaker
+                      </div>
+                      <div class="fs-6 mx-2">
+                        <p>
+                          Timothy is a Renewable Energy Specialist in the
+                          Greening and Sustainability Team.
+                        </p>
+                        <p>
+                          He leads the Green Energy Team’s data modeling through
+                          the RETScreen tool, providing support for emissions
+                          calculations and verification of carbon savings.
+                        </p>
+                        <p>Email: whitaker@unhcr.org</p>
+                      </div>
+                    </div>
+                    <div class="w-25">
+                      <div class="text-center fs-4 fw-500 mb-3">
+                        Mickaël Edon
+                      </div>
+                      <div class="fs-6">
+                        <p>
+                          Mickaël is a Renewable Energy Specialist and an Energy
+                          Officer in the Greening and Sustainability Team.
+                        </p>
+                        <p>
+                          He supports rollout of the Green Box project, conducts
+                          energy audits, and develops and validates
+                          energy-related business cases for UNHCR offices. He is
+                          the technical focal point for several countries.
+                        </p>
+                        <p>Email: edon@unhcr.org</p>
+                      </div>
+                    </div>
+                    <div class="w-25">
+                      <div class="text-center fs-4 fw-500 mb-3">
+                        Mustafa Al-Momani
+                      </div>
+                      <div class="fs-6">
+                        <p>
+                          Mustafa is a Renewable Energy Specialist (RES) in the
+                          Greening and Sustainability Team (deployed by NORCAP).
+                        </p>
+                        <p>
+                          He supports rollout of the Green Box project, conducts
+                          energy audits, and develops and validates
+                          energy-related business cases for UNHCR offices. He is
+                          the technical focal point for the Eastern, Horn of
+                          Africa, and Great Lakes (EHAGL) Countries.
+                        </p>
+                        <p></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white p-1">
+                <h4>Green Financing Facility Team</h4>
+              </div>
+
+              <div class="w-100 bg-dark text-white py-2">
+                <div
+                  class="w-80 bg-black py-2 d-flex justify-content-around mx-auto"
+                >
+                  <div>
+                    <img
+                      class="portrait"
+                      src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_306/1669887326201.jpg"
+                    />
+                  </div>
+
+                  <div>
+                    <img
+                      class="portrait"
+                      src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_303/1669887163732.jpg"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      class="portrait"
+                      src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_317/1669887837264.jpg"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      class="portrait"
+                      src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_325/1669887952112.jpg"
+                    />
+                  </div>
+                </div>
+                <div class="d-flex w-80 bg-black mx-auto pt-3 pb-4">
+                  <div class="w-25 ml-3">
+                    <div class="text-center fs-4 fw-500 mb-3">
+                      Sonia Miszczak
+                    </div>
+                    <div class="fs-6 mx-2">
+                      <p>Sonia is a Project Officer.</p>
+                      <p>
+                        She works on project delivery and implementation for
+                        converting UNHCR operations from diesel to renewable
+                        energy to procure from private sector independent power
+                        producers through Power Purchase Agreements or other
+                        such long-term agreements.
+                      </p>
+                      <p>Email: miszcak@unhcr.org</p>
+                    </div>
+                  </div>
+                  <div class="w-25">
+                    <div class="text-center fs-4 fw-500 mb-3">Ludo Moroka</div>
+                    <div class="fs-6 mx-2">
+                      <p>Ludo is a Project Co-ordination Officer.</p>
+                      <p>
+                        She coordinates the implementation of pre-designed power
+                        solutions, a catalogue of solar power solutions designed
+                        to ensure simple and quick solarisation of UNHCR
+                        offices.
+                      </p>
+                      <p>Email: moroka@unhcr.org</p>
+                    </div>
+                  </div>
+                  <div class="w-25">
+                    <div class="text-center fs-4 fw-500 mb-3">
+                      Wangeci Wanyahoro
+                    </div>
+                    <div class="fs-6 mx-2">
+                      <p>Wangeci is a Project Officer.</p>
+                      <p>
+                        She is responsible for the GFF implementation in the
+                        pilot countries of Kenya and Uganda and ensuring that
+                        the pilot projects successfully start construction on
+                        time.
+                      </p>
+                      <p>Email: wanyahoro@unhcr.org</p>
+                    </div>
+                  </div>
+                  <div class="w-25">
+                    <div class="text-center fs-4 fw-500 mb-3">
+                      Alessandra Knappertsbusch
+                    </div>
+                    <div class="fs-6 mx-2">
+                      <p>Alessandra is a Project Officer.</p>
+                      <p>
+                        She works on project implementation, covering technical
+                        and economic site evaluation, procurement preparation
+                        and financial business case analyses. .
+                      </p>
+                      <p>Email: Knappertsbusch@unhcr.org</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white p-1">
+                <h4>Green Policy Team</h4>
+              </div>
+
+              <div class="w-100 bg-dark">
+                <div
+                  class="w-80 pt-3 my-2 mx-auto bg-black text-white d-flex justify-content-center"
+                >
+                  <div class="w-33">
+                    <div class="d-flex justify-content-center">
+                      <div>
+                        <img
+                          class="portrait"
+                          src="https://www.arcgis.com/sharing/rest/content/items/015b4153a8e94201aa90f615ebc2eb40/resources/images/widget_194/1669884285180.jpg"
+                        />
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <h6 class="my-3">
+                        <strong>Makeena Nkirote Kiugu</strong>
+                      </h6>
+                    </div>
+                    <div class="fs-6">
+                      <p>Makeena is a Policy Specialist</p>
+                      <p>
+                        She leads environmental policy and best practice
+                        guidance development for UNHCR buildings, fleet and
+                        travel, as well as the development of Environmental
+                        Management Systems and providing communications
+                        oversight for the team.
+                      </p>
+                      <br />
+                      <p>Email: kigu@unhcr.org</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="helper-nodes-container"></div>
+    </div>
+    <div id="bottom-left-buttons-wrapper-div" class="">
+      <a
+        href="index.htm"
+        class="btn btn-outline-blue d-flex justify-content-center align-items-center my-1 w-100 p-0"
+        target="_self"
+      >
+        Back
+      </a>
+    </div>
+    <div
+      id="mttContainer"
+      class="bootstrapiso notranslate"
+      data-html="true"
+      data-original-title=""
+      title=""
+      style="transform: translate(4px, 491px)"
+    ></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+      var seconds = 0;
+      $("body").ready(() => {
+        setInterval(() => {
+          seconds++;
+          if (seconds == 21) window.location.assign("index.htm");
+        }, 1000);
+
+        $("body").on("mouseup", (e) => {
+          seconds = 0;
+        });
+      });
+    </script>
+  </body>
+</html>

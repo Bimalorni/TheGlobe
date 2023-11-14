@@ -1,0 +1,168 @@
+h1, h2, h3, h4, h5, h6, div, p, span, strong, form, input, select, option {
+	font-family: Arial, MyArial, sans-serif !important;
+}
+.fs-1 {
+	font-size: 2rem;
+}
+.fs-2 {
+	font-size: 1.75rem;
+}
+.fs-3 {
+	font-size: 1.5rem;
+}
+.fs-4 {
+	font-size: 1.25rem;
+}
+.fs-5 {
+	font-size: 1rem;
+}
+.fs-6 {
+	font-size: .75rem;
+}
+.fs-7 {
+	font-size: .5rem;
+}
+.fs-6-5 {
+	font-size: .85rem;
+}
+.fs-16px {
+	font-size: 16px;
+}
+.fs-13px {
+	font-size: 13px;
+}
+.fs-11px {
+	font-size: 11px;
+}
+.fs-10px {
+	font-size: 10px;
+}
+.fs-9px {
+	font-size: 9px;
+}
+
+.w-80 {
+    width: 80%;
+}
+.w-50 {
+	width: 50%;
+}
+.w-33 {
+    width: 33%;
+}
+.w-25 {
+	width: 25%;
+}
+
+.fw-900 {
+	font-weight: 900;
+}
+.fw-800 {
+	font-weight: 800;
+}
+.fw-700 {
+	font-weight: 700;
+}
+.fw-600 {
+	font-weight: 600;
+}
+.fw-500 {
+	font-weight: 500;
+}
+.fw-400 {
+	font-weight: 400;
+}
+.fw-300 {
+	font-weight: 300;
+}
+.fw-200 {
+	font-weight: 200;
+}
+.fw-100 {
+	font-weight: 100;
+}
+.mt-10 {
+	margin-top: 6rem;
+}
+.mt-8 {
+	margin-top: 4.8rem;
+}
+.bg-black {
+    background-color: #000000;
+}
+.bg-dark {
+    background-color: #202020;
+}
+.bg-pg-dark {
+    background-color: #050505;
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+  }
+
+#top-emission-offices-view-card {
+	border-radius: 0;
+	position: absolute;
+	left: 80px;
+	top: 121px;
+	width: 300px
+}
+#regular-emission-offices-view-card {
+    border-radius: 0;
+    position: absolute;
+    left: 80px;
+    top: 160px;
+    width: 300px
+}
+table {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+
+thead {
+    flex: 0 0 auto;
+}
+
+tbody {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+	max-height: 200px;
+}
+
+tr {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+thead {
+    background-color: #18375F; 
+    color: white !important;
+}
+td, th {
+    /* text-align: center; */
+}
+th {
+    color: white !important;
+}
+td {
+    color: #18375F !important;
+}

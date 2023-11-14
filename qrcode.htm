@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>The Globe</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link rel="shortcut icon" href="assets/icons/exb.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css"
+    />
+    <link href="./assets/css/qrcode.css" rel="stylesheet" />
+    <link href="./assets/css/common.css" rel="stylesheet" />
+
+    <style></style>
+  </head>
+  <body class="bg-black">
+    <div class="container d-flex align-items-center" style="height: 95vh">
+      <div class="w-100 mx-auto text-white">
+        <div class="w-100 text-center my-5">
+          <h3>Discover the ins and outs of our exciting projects!</h3>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4 d-flex flex-column align-items-center">
+            <a
+              href="https://app.powerbi.com/groups/18dd85db-91bd-4741-bf9b-2fa19a245876/reports/6360a36c-4a4b-4685-b6ea-5fb4f5dee4b2/ReportSection31302459e2eec3372c83?experience=power-bi"
+              target="_self"
+              id="greening-the-blue-btn"
+              class="btn btn-outline-blue d-flex align-items-center my-1 p-0"
+            >
+              <p class="mb-0 w-100 d-flex justify-content-center">
+                Greening the Blue
+              </p>
+            </a>
+            <img
+              src="assets/icons/QR_GTB dashboard_white.svg"
+              style="width: 70%"
+            />
+          </div>
+          <div class="col-md-6 col-lg-4 d-flex flex-column align-items-center">
+            <a
+              href="https://app.powerbi.com/links/UNs95QHL43?ctid=e5c37981-6664-4134-8a0c-6543d2af80be&pbi_source=linkShare"
+              class="btn btn-outline-blue d-flex align-items-center my-1 p-0"
+              target="_self"
+              id="unifier-portal-btn"
+            >
+              <p class="mb-0 w-100 d-flex justify-content-center">
+                Unifier portal
+              </p>
+            </a>
+            <img
+              src="assets/icons/QR_Unifier portal_white.svg"
+              style="width: 70%"
+            />
+          </div>
+          <div class="col-md-6 col-lg-4 d-flex flex-column align-items-center">
+            <a
+              target="_self"
+              id="green-box-dashboard-btn"
+              class="btn btn-outline-blue d-flex align-items-center my-1 p-0"
+            >
+              <p class="mb-0 w-100 d-flex justify-content-center">
+                Green box dashboard
+              </p>
+            </a>
+            <img src="assets/icons/QR_GreenBox.png" style="width: 70%" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="card bg-map-dark d-none" style="width: 350px">
+        <div class="card-header pb-0 border-0">
+          <strong>UNHCR Office</strong>
+          <p class="mb-0" style="color: yellow">Nairobi</p>
+        </div>
+        <div class="card-body text-center px-0">
+          <div class="row bg-map-green mx-0 fs-5 text-left">
+            <div class="col-sm-6">Office Type</div>
+            <div class="col-sm-6">Country Office</div>
+          </div>
+          <div class="row px-3 fs-5 text-left">
+            <div class="col-sm-6">Country</div>
+            <div class="col-sm-6">Kenya</div>
+          </div>
+          <div class="row bg-map-green mx-0 fs-5 text-left">
+            <div class="col-sm-6">Location</div>
+            <div class="col-sm-6">Nairobi</div>
+          </div>
+          <div class="row mx-0">
+            <div id="demo" class="carousel slide w-100" data-ride="carousel">
+              <!-- Indicators -->
+
+              <!-- The slideshow -->
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="./assets/img/plane.png" alt="Los Angeles" />
+                </div>
+                <div class="carousel-item">
+                  <img src="./assets/img/plane.png" alt="Chicago" />
+                </div>
+                <div class="carousel-item">
+                  <img src="./assets/img/plane.png" alt="New York" />
+                </div>
+              </div>
+
+              <!-- Left and right controls -->
+              <a class="carousel-prev-control" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </a>
+              <a class="carousel-next-control" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="row mx-0">
+            <div id="accordion" class="w-100 accordion">
+              <div class="card bg-map-dark">
+                <div class="card-header">
+                  <a
+                    class="card-link text-white"
+                    data-toggle="collapse"
+                    href="#collapseOne"
+                  >
+                    Green Boxes
+                  </a>
+                </div>
+                <div
+                  id="collapseOne"
+                  class="collapse show"
+                  data-parent="#accordion"
+                >
+                  <div class="card-body"></div>
+                </div>
+              </div>
+              <div class="card bg-map-dark">
+                <div class="card-header">
+                  <a
+                    class="collapsed card-link"
+                    data-toggle="collapse"
+                    href="#collapseTwo"
+                  >
+                    Solar Pannels
+                  </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                  <div class="card-body"></div>
+                </div>
+              </div>
+              <div class="card bg-map-dark">
+                <div class="card-header">
+                  <a
+                    class="collapsed card-link"
+                    data-toggle="collapse"
+                    href="#collapseThree"
+                  >
+                    Generators
+                  </a>
+                </div>
+                <div
+                  id="collapseThree"
+                  class="collapse"
+                  data-parent="#accordion"
+                >
+                  <div class="card-body">Lorem ipsum..</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mx-0 fs-5 text-left">
+            <div class="col-sm-6">Gross Area( m<sup>2</sup> )</div>
+            <div class="col-sm-6">Nairobi</div>
+          </div>
+          <div class="row bg-map-green mx-0 fs-5 text-left">
+            <div class="col-sm-6">Number of Staff</div>
+            <div class="col-sm-6"></div>
+          </div>
+          <div class="row mx-0 fs-5 text-left">
+            <div class="col-sm-6">Greening the Blue 2023</div>
+            <div class="col-sm-6"></div>
+          </div>
+          <div class="row bg-map-green mx-0 fs-5 text-left">
+            <div class="col-sm-6">GreenBoxes</div>
+            <div class="col-sm-6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="bottom-left-buttons-wrapper-div" class="">
+      <a
+        href="index.htm"
+        class="btn btn-outline-blue d-flex justify-content-center align-items-center my-1 w-100 p-0"
+        target="_self"
+      >
+        Back
+      </a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      var seconds = 0;
+      $("body").ready(() => {
+        setInterval(() => {
+          seconds++;
+          if (seconds == 21) window.location.assign("index.htm");
+        }, 1000);
+
+        $("body").on("mouseup", (e) => {
+          seconds = 0;
+        });
+      });
+    </script>
+  </body>
+</html>

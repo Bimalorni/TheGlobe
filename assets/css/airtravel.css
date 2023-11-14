@@ -1,0 +1,71 @@
+.canvasjs-chart-credit {
+    display:none;
+}
+.air-travel-panel-image {
+    width: 80%;
+}
+#airtravel-info {
+    flex: 4;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* gap: 30px; */
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px 0px;
+    border: none;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    margin-left: 10%;
+    margin-right: 10%;  
+}
+#footer-text {
+    position:absolute;
+    bottom: 0px;
+    left: calc(50vw - 220px);
+}
+
+@media (max-width: 1480px) {
+    #footer-text {
+        right: 610px;
+    }  
+}
+
+@media (max-width: 1160px) {
+    #footer-text {
+        bottom: 45px;
+    }
+}
+
+#top-flights-view-card {
+    border-radius: 0;
+    position: absolute;
+    left: 80px;
+    top: 121px;
+    width: 300px
+}
+
+#regular-flights-view-card {
+    border-radius: 0;
+    position: absolute;
+    left: 80px;
+    top: 160px;
+    width: 300px
+}
+
+#view-top-flights-card-btn i {
+    color: #FFFF00;
+}
+
+#view-regular-flights-card-btn i {
+    color: #0EB1FF;
+}
+
+.criteria {
+    color: #18375F;
+}
+#left-title span {
+    line-height: normal;
+}

@@ -1,0 +1,24 @@
+.btn.btn-outline-blue {
+    border: 1px solid white;
+    height: 42px;
+    color: rgb(40, 162, 209);
+    border-radius: 0;
+    color: white;
+    position: relative;
+    width: 60%;
+}
+.btn.btn-outline-blue.active {
+	border: 1px solid rgb(40, 162, 209);
+	color: rgb(40, 162, 209);
+}
+.btn.btn-outline-blue:hover {
+	background-color: rgb(150, 150, 150);
+}
+
+#bottom-left-buttons-wrapper-div {
+	position: absolute;
+	bottom: 10px;
+	left: 20px;	
+	width: 220px;
+}
+

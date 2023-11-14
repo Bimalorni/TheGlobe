@@ -1,0 +1,355 @@
+.bg-map-dark {
+	color: white;
+	border-radius: none;
+	background-color: #303030;
+}
+
+.bg-black {
+	background-color: rgb(0, 0, 0);
+}
+.bg-green-box {
+	background-color: rgb(21, 155, 129);
+}
+
+.font-office-blue {
+	color: rgb(24, 106, 168);
+}
+
+.bg-map-green {
+	background-color: rgba(50, 54, 68, 1.0);
+	font-size: 12px;
+}
+
+
+
+#accordion .card-header {
+	text-align: left;
+	padding-left:1rem;
+	background-color: rgb(50, 54, 68);
+}
+
+#accordion .card-header a {
+	color: white !important;
+
+}
+
+.carousel-next-control, .carousel-prev-control {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: end;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 15%;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    background: 0 0;
+    border: 0;
+    opacity: .5;
+    transition: opacity .15s ease;
+}
+
+.carousel-prev-control {
+	right: 30px;
+}
+.carousel-next-control {
+	right: 0;
+}
+.mapboxgl-popup-content {
+	padding: 0 !important;
+}
+
+/*#btn-spin {
+	font: bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	background-color: #3386c0;
+	color: #fff;
+	position: absolute;
+	top: 20px;
+	left: 10%;
+	z-index: 1;
+	border: none;
+	width: 100px;
+	margin-left: -100px;
+	display: block;
+	cursor: pointer;
+	padding: 5px;
+	border-radius: 3px;
+}
+#btn-spin:hover {
+	background-color: #4ea0da;
+}*/
+
+#toggle-view-layer-div {
+	border-radius: 0px;
+}
+
+.accordion .card-header {
+	padding: .3rem;
+}
+.border-radius-0 {
+	border-radius: 0px;
+}
+
+.btn.btn-black:hover {
+	background-color: rgb(150, 150, 150);
+}
+.btn.btn-transparent {
+	width: 40px;
+	height: 40px;
+}
+.btn.btn-transparent:focus {
+	box-shadow: none !important;
+}
+.btn.btn-outline-blue {
+	border: 1px solid white;
+	height: 42px;
+	color: rgb(40, 162, 209);
+	border-radius: 0;
+	color: white;
+	margin-left: 20px;
+	position: relative;
+}
+.btn.btn-outline-blue.active {
+	border: 1px solid rgb(40, 162, 209);
+	color: rgb(40, 162, 209);
+}
+.btn.btn-outline-blue:hover {
+	background-color: rgb(150, 150, 150);
+}
+
+.accordion-card-header-icon {
+	position: absolute;
+	right:10px;
+	transform: scale(1.8, 1);
+/*	color: black;*/
+/*	background-color: white;*/
+}
+
+#right-panel {
+	position: absolute;
+	width:286px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	background-color: rgba(33, 33, 33, 0.5);
+}
+
+#right-inner-panel {
+	box-sizing: border-box;
+    color: white;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-left: 2px solid white;
+    flex: 0;
+    height: 100%;
+	overflow-y:auto;
+}
+
+#totalPowerDiv {
+    flex: 2;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+    text-align: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: none;
+    border-top: 2px solid white;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20px;
+}
+
+#blueStats {
+    flex: 4;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* gap: 30px; */
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px 0px;
+    border: none;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 25px;
+}
+
+#left-panel {
+	position: fixed;
+	width: 300px;
+	left: 10px;
+	top: 10px;
+	bottom: 10px;
+}
+
+#view-place-input-wrapper-div {
+	position: absolute;
+	bottom: 10px;
+    right: 300px;
+    width: 300px;
+}
+#view-place-input-wrapper-div input[type=text] {
+  padding: 10px;
+  height: 38px;
+  border: 1px solid grey;
+  float: left;
+  width: 250px;
+  background: #f1f1f1;
+}
+
+#view-place-input-wrapper-div button {
+  float: left;
+  width: 20%;
+  height: 30px;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+#view-place-input-wrapper-div button:hover {
+  background: #0b7dda;
+}
+
+#view-place-input-wrapper-div::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.my-0-5 {
+	margin-top: .1rem;
+	margin-bottom: .1rem;
+}
+
+.card-body .row {
+	padding: 4px;
+}
+#toggle-layer-button-wrapper-div {
+	position: fixed;
+	right: 300px;
+	top: 100px;
+}
+#top-left-buttons-wrapper-div {
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+#left-title {
+	position:absolute;
+	top: 22px;
+	left: 135px;
+	width: 270px;
+	line-height: normal;
+}
+
+#right-title {
+	position:absolute;
+	top: 20px;
+	right: 300px;
+	max-width: 160px;
+}
+#bottom-left-buttons-wrapper-div {
+	position: absolute;
+	bottom: 10px;
+	left: 20px;	
+	width: 220px;
+}
+.bg-popup-grey {
+	background-color: rgb(197, 205, 214);
+	color: black !important;
+	font-weight:500;
+}
+.bg-popup-blue {
+	background-color: rgb(177, 187, 201);
+	color: black !important;
+}
+.bg-popup-cyan {
+	background-color: rgb(97, 118, 136);
+}
+.mapboxgl-popup-content {
+	border: 1.5px solid white;
+}
+@font-face {
+    font-family: "MyArial";
+    src: url(../fonts/arial.ttf);
+}
+
+.carousel-prev-control, .carousel-next-control {
+	bottom: 10px !important;
+}
+.ui-autocomplete {
+    left: unset !important;
+	right: 350px !important;
+	width: 250px !important
+	/* max-height: 500px;
+	overflow-y: auto; */
+}
+.map-control-btn {
+	width: 39px;
+	height: 39px;
+}
+.mapboxgl-popup {
+	max-width: unset !important;
+}
+.panel-image {
+	max-width: 60px;
+	width: 80%;
+}
+.mapboxgl-popup-content .card-body {
+	font-size: 12px;
+}
+.circle-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	width: 2.5vw;
+	height: 2.5vw;
+	border: 1px solid white; /* Set your desired border color */
+  }
+#view-top-emission-offices-card-btn i {
+	color: #FFFF00
+}
+#view-regular-emission-offices-card-btn i {
+	color: #0EB1FF
+}
+table {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+
+thead {
+    flex: 0 0 auto;
+}
+
+tbody {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+	max-height: 300px;
+}
+
+tr {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}

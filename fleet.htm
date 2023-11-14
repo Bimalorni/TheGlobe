@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>The Globe | Fleet</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link rel="shortcut icon" href="assets/icons/exb.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css"
+    />
+    <link href="./assets/css/index.css" rel="stylesheet" />
+    <link href="./assets/css/common.css" rel="stylesheet" />
+    <link href="./assets/css/fleet.css" rel="stylesheet" />
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="toggle-layer-button-wrapper-div">
+      <div class="position-relative">
+        <div class="text-white text-right">
+          <a
+            id="view-toggle-layer-btn"
+            class="btn btn-black bg-map-dark border-radius-0 mx-1 d-none justify-content-center align-items-center"
+            ><i class="bi bi-stack"></i
+          ></a>
+          <a
+            class="btn btn-black bg-map-dark border-radius-0 mx-1 d-flex justify-content-center align-items-center my-2"
+            onclick="flyHome()"
+            ><i class="bi bi-house-door"></i
+          ></a>
+        </div>
+        <div
+          id="toggle-layers-view-card"
+          class="card bg-map-dark border-0 toggle-layer-accordion-wrapper-card d-none"
+          style="
+            border-radius: 0;
+            position: absolute;
+            right: 50px;
+            top: 0;
+            min-width: 300px;
+          "
+        >
+          <div class="card-body p-2 border-radius-0 fs-6-5">
+            <div
+              id="toggle-layer-accordion"
+              class="border-radius-0 accordion w-100 border-0"
+            >
+              <div class="card bg-black pb-2">
+                <div class="card-header pb-3">
+                  <a
+                    class="collapsed card-link text-white"
+                    id="toggle-fleet-btn"
+                    data-toggle="collapse"
+                    href="#departure-accordion-part"
+                  >
+                    <i
+                      class="bi bi-eye px-2"
+                      onclick="toggleViewLayer(event, 1)"
+                    ></i>
+                    Fleet
+                    <i
+                      class="bi bi-filter-square-fill accordion-card-header-icon"
+                    ></i>
+                  </a>
+                </div>
+                <div
+                  id="departure-accordion-part"
+                  class="collapse"
+                  data-parent="#accordion"
+                >
+                  <div class="card-body bg-map-dark border-0 pt-0 pb-3">
+                    <div class="d-flex">
+                      <img
+                        src="./assets/icons/Greenbox.png"
+                        width="25px"
+                        height="25px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="top-fleets-view-card"
+      class="card bg-map-dark border-0 toggle-layer-accordion-wrapper-card d-none"
+    >
+      <div
+        class="card-header p-2 d-flex justify-content-center align-items-center"
+        style="background-color: #303030"
+      >
+        <h5 class="mb-0 text-center" style="color: #faeb00">
+          20 Offices with the most CO2 emissions
+        </h5>
+      </div>
+      <div class="card-body p-1 border-radius-0 fs-6-5 bg-white">
+        <div class="container tableFixHead px-1">
+          <table class="table">
+            <thead>
+              <th>Location</th>
+              <th width="60%">CO2 emitted (tons)</th>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="row d-none">
+          <div class="col">
+            <img src="./assets/icons/plane_icon_level1.png" width="20px" /><span
+              id="level_1_criteria_display_dom"
+              class="criteria"
+            ></span>
+          </div>
+          <div class="col">
+            <img src="./assets/icons/plane_icon_level2.png" width="20px" /><span
+              id="level_2_criteria_display_dom"
+              class="criteria"
+            ></span>
+          </div>
+          <div class="col">
+            <img src="./assets/icons/plane_icon_level3.png" width="20px" /><span
+              id="level_3_criteria_display_dom"
+              class="criteria"
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="regular-fleets-view-card"
+      class="card bg-map-dark border-0 toggle-layer-accordion-wrapper-card d-none"
+    >
+      <div
+        class="card-header p-2 d-flex justify-content-center align-items-center"
+        style="background-color: white"
+      >
+        <h6 class="mb-0" style="color: #18375f">Other Offices</h6>
+      </div>
+      <div class="card-body p-1 border-radius-0 fs-6-5 bg-white text-primary">
+        <div class="container tableFixHead px-1">
+          <table class="table">
+            <thead>
+              <th>Location</th>
+              <th width="60%">CO2 emitted (tons)</th>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="view-place-input-wrapper-div">
+      <div class="position-relative">
+        <input
+          type="text"
+          id="view-fleet-search-input"
+          class=""
+          placeholder="Example: Caracas"
+          name="search2"
+        />
+        <input type="hidden" id="autocomplete-select-id" />
+        <a
+          class="btn btn-black bg-map-dark border-radius-0 mx-1 d-flex justify-content-center align-items-center"
+          type="submit"
+          ><i class="bi bi-search"></i
+        ></a>
+      </div>
+    </div>
+    <div id="top-left-buttons-wrapper-div">
+      <button
+        class="btn btn-black bg-map-dark border-radius-0 mx-1 d-flex justify-content-center align-items-center my-0-5 map-control-btn"
+        onclick="doZoomIn()"
+      >
+        <img src="./assets/icons/plus.png" class="img-fluid" />
+      </button>
+      <button
+        class="btn btn-black bg-map-dark border-radius-0 mx-1 d-flex justify-content-center align-items-center mb-2 map-control-btn"
+        onclick="doZoomOut()"
+      >
+        <i class="bi bi-dash-lg fs-4"></i>
+      </button>
+      <button
+        class="btn btn-black bg-map-dark border-radius-0 mx-1 justify-content-center align-items-center my-0-5 d-none"
+      >
+        <i class="bi bi-arrows-move"></i>
+      </button>
+      <button
+        class="btn btn-black bg-map-dark border-radius-0 mx-1 justify-content-center align-items-center mb-2 d-none"
+      >
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+      <button
+        class="btn btn-black bg-map-dark border-radius-0 mx-1 justify-content-center align-items-center mb-3 d-none"
+        style="border-radius: 50%"
+      >
+        <i class="bi bi-plus"></i>
+      </button>
+      <button
+        id="btn-spin"
+        class="btn btn-transparent border-radius-0 d-none justify-content-center align-items-center"
+      >
+        <i class="bi bi-play text-white" style="font-size: 2.75rem"></i>
+      </button>
+      <button
+        class="btn btn-black bg-map-dark border-radius-0 mx-1 d-flex justify-content-center align-items-center mt-2 map-control-btn p-0"
+        id="view-top-fleets-card-btn"
+      >
+        <img src="./assets/icons/car_yellow.png" class="bi bi-bus-front w-75" />
+      </button>
+      <button
+        class="btn btn-black bg-map-dark border-radius-0 mx-1 d-flex justify-content-center align-items-center my-0-5 map-control-btn p-0"
+        id="view-regular-fleets-card-btn"
+      >
+        <img src="./assets/icons/car.png" class="bi bi-bus-front w-75" />
+      </button>
+    </div>
+    <div id="bottom-left-buttons-wrapper-div" class="">
+      <a
+        href="index.htm"
+        class="btn btn-outline-blue d-flex align-items-center my-1 w-100 p-0"
+        target="_self"
+        ><i class="bi bi-link-45deg fs-4 mx-2"></i> Offices
+      </a>
+      <a
+        href="airtravel.htm"
+        class="btn btn-outline-blue d-flex align-items-center my-1 w-100 p-0"
+        target="_self"
+        ><i class="bi bi-link-45deg fs-4 mx-2"></i> Air travel
+      </a>
+      <a
+        href="our-team.htm"
+        class="btn btn-outline-blue d-flex align-items-center my-1 w-100 p-0"
+        target="_self"
+        ><i class="bi bi-link-45deg fs-4 mx-2"></i> Meet the team
+      </a>
+      <a
+        href="qrcode.htm"
+        class="btn btn-outline-blue d-flex align-items-center my-1 w-100 p-0"
+        target="_self"
+        ><i class="bi bi-link-45deg fs-4 mx-2"></i> ... Much more
+      </a>
+    </div>
+    <div id="left-title">
+      <span class="text-white fs-2 fw-600">
+        UNHCR fleet’s environmental footprint
+      </span>
+    </div>
+    <div id="right-title">
+      <img class="img-fluid" src="./assets/img/UNHCR Logo white.png" />
+    </div>
+
+    <div
+      id="right-panel"
+      class="text-white"
+      style="border-left: 2px solid white"
+    >
+      <div
+        id="chartContainer"
+        class="my-3"
+        style="width: 100%; min-height: 250px; align-items: start !important"
+      ></div>
+      <div
+        class="container w-100 position-relative d-flex flex-wrap align-content-around"
+        style="height: calc(100vh - 350px)"
+      >
+        <p class="w-100 fs-16px fw-600 text-center">Fleet</p>
+        <div class="row mx-auto w-80 text-center">
+          <div class="col-md-3 col-sm-6 p-1">
+            <img src="./assets/icons/CO2.png" class="img-fluid w-100" />
+          </div>
+          <div class="col-md-9 col-sm-6">
+            <h6><strong id="co2_display_dom"> 0 </strong></h6>
+            <p class="fs-13px">Tons of CO<sub>2</sub> emitted</p>
+          </div>
+        </div>
+        <div class="row mx-auto w-80 text-center">
+          <div class="col-md-3 col-sm-6 p-1">
+            <div class="w-100">
+              <img
+                src="./assets/icons/icon_travel_km.png"
+                class="img-fluid w-100"
+              />
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-6">
+            <h6><strong id="km_display_dom"> 0 </strong></h6>
+            <p class="fs-13px">Km travelled</p>
+          </div>
+        </div>
+        <div class="row mx-auto w-80 text-center">
+          <div class="col-md-3 col-sm-6 p-1">
+            <div class="w-100">
+              <img src="./assets/icons/car-icon.png" class="img-fluid w-100" />
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-6">
+            <h6><strong id="total_number_fleet_dom"> 0 </strong></h6>
+            <p class="fs-13px">Number of vehicles</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card bg-map-dark d-none" style="width: 350px">
+        <div class="card-header pb-0 border-0">
+          <strong>UNHCR Office</strong>
+          <p class="mb-0" style="color: yellow">Nairobi</p>
+        </div>
+        <div class="card-body text-center px-0">
+          <div class="row bg-map-green mx-0 fs-5 text-left">
+            <div class="col-sm-6">Office Type</div>
+            <div class="col-sm-6">Country Office</div>
+          </div>
+          <div class="row px-3 fs-5 text-left">
+            <div class="col-sm-6">Country</div>
+            <div class="col-sm-6">Kenya</div>
+          </div>
+          <div class="row bg-map-green mx-0 fs-5 text-left">
+            <div class="col-sm-6">Location</div>
+            <div class="col-sm-6">Nairobi</div>
+          </div>
+          <div class="row mx-0">
+            <div id="demo" class="carousel slide w-100" data-ride="carousel">
+              <!-- Indicators -->
+
+              <!-- The slideshow -->
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="./assets/img/offices/image_coming_soon_v2.jpg"
+                    alt="Los Angeles"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="./assets/img/offices/image_coming_soon_v2.jpg"
+                    alt="Chicago"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="./assets/img/offices/image_coming_soon_v2.jpg"
+                    alt="New York"
+                  />
+                </div>
+              </div>
+
+              <!-- Left and right controls -->
+              <a class="carousel-prev-control" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </a>
+              <a class="carousel-next-control" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="row mx-0">
+            <div id="accordion" class="w-100 accordion">
+              <div class="card bg-map-dark">
+                <div class="card-header">
+                  <a
+                    class="card-link text-white"
+                    data-toggle="collapse"
+                    href="#collapseOne"
+                  >
+                    Green Boxes
+                  </a>
+                </div>
+                <div
+                  id="collapseOne"
+                  class="collapse show"
+                  data-parent="#accordion"
+                >
+                  <div class="card-body"></div>
+                </div>
+              </div>
+              <div class="card bg-map-dark">
+                <div class="card-header">
+                  <a
+                    class="collapsed card-link"
+                    data-toggle="collapse"
+                    href="#collapseTwo"
+                  >
+                    Solar Pannels
+                  </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                  <div class="card-body"></div>
+                </div>
+              </div>
+              <div class="card bg-map-dark">
+                <div class="card-header">
+                  <a
+                    class="collapsed card-link"
+                    data-toggle="collapse"
+                    href="#collapseThree"
+                  >
+                    Generators
+                  </a>
+                </div>
+                <div
+                  id="collapseThree"
+                  class="collapse"
+                  data-parent="#accordion"
+                >
+                  <div class="card-body">Lorem ipsum..</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mx-0 fs-5 text-left">
+            <div class="col-sm-6">Gross Area( m<sup>2</sup> )</div>
+            <div class="col-sm-6">Nairobi</div>
+          </div>
+          <div class="row bg-map-green mx-0 fs-5 text-left">
+            <div class="col-sm-6">Number of Staff</div>
+            <div class="col-sm-6"></div>
+          </div>
+          <div class="row mx-0 fs-5 text-left">
+            <div class="col-sm-6">Greening the Blue 2023</div>
+            <div class="col-sm-6"></div>
+          </div>
+          <div class="row bg-map-green mx-0 fs-5 text-left">
+            <div class="col-sm-6">GreenBoxes</div>
+            <div class="col-sm-6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer-text">
+      <p class="text-white fs-6">UNHCR as a custodian</p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"
+    ></script>
+    <script type="text/javascript" src="./assets/js/bar_chart.js"></script>
+    <script>
+      // TO MAKE THE MAP APPEAR YOU MUST
+      // ADD YOUR ACCESS TOKEN FROM
+      // https://account.mapbox.com
+
+      const ICON_SIZE = 0.5; // the adding layer's icon size
+      const ICON_COLOR = ""; // adding layer's icon color
+      const ACCESS_TOKEN =
+        "pk.eyJ1IjoiYmVhdHJpY2VtYWxvcm5pIiwiYSI6ImNsbjRwNTI0YTAycDMybGxkcGxwN2JiNHEifQ.CfkKzYOLd9aRwQ4dJvSPUg";
+      const FLY_ZOOM = 10; // the zoom value when you search and select the office name from the autocomplete
+      const INITIAL_ZOOM = 1.5;
+      const HOME_POSITION = [16.97314, 7.98974];
+      const SECONDS_OF_HOUR = 3600;
+      const HOURS_OF_DAY = 24;
+      const DAYS_OF_YEAR = 365;
+      const SECONDS_OF_YEAR = SECONDS_OF_HOUR * HOURS_OF_DAY * DAYS_OF_YEAR;
+      const KWH_UPGRADE_PERIOD = 5000; // mseconds after which the KWH will be updated
+      const PLANE_ICON_PATH = "./assets/icons/plane_icon_blue.png";
+      var map; // mapboxgl object
+      var clickedRouteId = null;
+
+      var curOfficeCode = ""; // currently selected office's code
+      var KWHTimer;
+      var currentPopup;
+      var totalTickets = 0;
+      var totalCO2 = 0;
+      var totalNetSpend = 0;
+
+      var co2Dom = $("#co2_display_dom");
+      var kmDom = $("#km_display_dom");
+      var numberFleetDom = $("#total_number_fleet_dom");
+      //  the information of layers to be added to the mapbox
+      const layers = [
+        {
+          sourceId: "offices",
+          layerId: "offices",
+          iconId: "offices",
+        },
+        {
+          sourceId: "green-boxes",
+          layerId: "green-boxes",
+          iconId: "green-boxes",
+        },
+        {
+          sourceId: "greening-blue",
+          layerId: "greening-blue",
+          iconId: "greening-blue",
+        },
+        {
+          sourceId: "fleet",
+          layerId: "fleet",
+          iconId: "fleet",
+        },
+      ];
+
+      const CO2_EMISSION_CRITERIA = 20;
+      // offices data to be displayed on the map
+      var fleets;
+      var graph;
+      var totalCo2 = 0;
+      var totalKm = 0;
+      var totalFleet = 0;
+      $(document).ready(() => {
+        fetch(`assets/data/Fleet.json`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("HTTP error " + response.status);
+            }
+            return response.json(); // Parse the JSON data from the response
+          })
+          .then((data) => {
+            fleets = data.fleet;
+            graph = data["Graph"];
+            const cnt = fleets.length;
+            for (let i = 0; i < cnt; i++) {
+              let one = fleets[i];
+
+              if (!one["Km travelled"] || !one["CO2 emitted (tons)"]) continue;
+              const km = isNaN(Number(one["Km travelled"]))
+                ? 0
+                : Number(one["Km travelled"]);
+              const co2 = isNaN(Number(one["CO2 emitted (tons)"]))
+                ? 0
+                : Number(one["CO2 emitted (tons)"]);
+              const fleet = isNaN(Number(one["# vehicles"]))
+                ? 0
+                : Number(one["# vehicles"]);
+
+              totalKm += km;
+              totalCO2 += co2;
+              totalFleet += fleet;
+              one["fleet_no"] = i;
+            }
+            init();
+            init_rotation();
+            let totalLarge = 0;
+            let totalSM = 0;
+            for (g of graph) {
+              totalLarge += g["Large car > 2800 CC "];
+              totalSM += g["Medium/Small car < 2800 CC "];
+            }
+            init_fleet_chart({
+              "Medium/Small car < 2800 CC ": totalSM,
+              "Large car > 2800 CC ": totalLarge,
+            });
+            init_fleet_autocomplete(fleets);
+          })
+          .catch((error) => {
+            console.error("There was a problem fetching the JSON file:", error);
+          });
+        var toggleLayerCardDom = $("#toggle-layers-view-card");
+
+        // When user clicks the button on the right sidebar card to toggle view the corresponding layer on the map
+        $("#view-toggle-layer-btn").on("click", (e) => {
+          let dom = $("#view-toggle-layer-btn");
+          let iDom = dom.find("i");
+          if (iDom.hasClass("bi-stack")) {
+            iDom.removeClass("bi-stack").addClass("bi-chevron-double-right");
+            toggleLayerCardDom.removeClass("d-none");
+          } else {
+            iDom.removeClass("bi-chevron-angle-right").addClass("bi-stack");
+            toggleLayerCardDom.addClass("d-none");
+          }
+          if (!$("#top-flights-view-card").hasClass("d-none"))
+            $("#top-flights-view-card").addClass("d-none");
+        });
+
+        $("#view-top-fleets-card-btn").on("click", () => {
+          const topCard = $("#top-fleets-view-card");
+          const regularCard = $("#regular-fleets-view-card");
+          topCard.toggleClass("d-none");
+          let topVisible, regularVisible;
+          if (!topCard.hasClass("d-none")) {
+            topVisible = "visible";
+            regularVisible = "none";
+            regularCard.addClass("d-none");
+          } else {
+            topVisible = "visible";
+            regularVisible = "visible";
+          }
+          map.setLayoutProperty("top-fleets", "visibility", topVisible);
+          map.setLayoutProperty("regular-fleets", "visibility", regularVisible);
+
+          lastingSeconds = 0;
+        });
+
+        $("#view-regular-fleets-card-btn").on("click", () => {
+          const topCard = $("#top-fleets-view-card");
+          const regularCard = $("#regular-fleets-view-card");
+          regularCard.toggleClass("d-none");
+          let topVisible, regularVisible;
+          if (!regularCard.hasClass("d-none")) {
+            topVisible = "none";
+            regularVisible = "visible";
+            topCard.addClass("d-none");
+          } else {
+            topVisible = "visible";
+            regularVisible = "visible";
+          }
+          map.setLayoutProperty("top-fleets", "visibility", topVisible);
+          map.setLayoutProperty("regular-fleets", "visibility", regularVisible);
+
+          lastingSeconds = 0;
+        });
+      });
+
+      // processes to be done to handle the toggle button click
+      function handleClickToggleButton(bShown, layerId, dom) {
+        if (bShown) {
+          map.setLayoutProperty(layerId, "visibility", "none");
+          dom.removeClass("bi-eye").addClass("bi-eye-slash");
+        } else {
+          map.setLayoutProperty(layerId, "visibility", "visible");
+          dom.removeClass("bi-eye-slash").addClass("bi-eye");
+        }
+      }
+
+      // toggle the no layer of the map when user clicks the toggle button on the right sidepanel
+      function toggleViewLayer(event, no) {
+        event.preventDefault();
+        event.stopPropagation();
+        let iDom = event.target;
+        let isShown = $(iDom).hasClass("bi-eye");
+        switch (no) {
+          case 1:
+            handleClickToggleButton(isShown, "fleets", $(iDom));
+            break;
+          case 2:
+            // handleClickToggleButton(isShown, 'plane-icons', $(iDom));
+            break;
+          case 3:
+            // handleClickToggleButton(isShown, 'arrival', $(iDom));
+            break;
+          case 4:
+            // handleClickToggleButton(isShown, 'departure', $(iDom));
+            break;
+          default:
+            break;
+        }
+      }
+
+      // insert a layer with a source data and icon image to a map
+      function insertLayer(
+        mapObj,
+        sourceName,
+        sourceData,
+        layerName,
+        iconName,
+        iconPath,
+        iconAnchor,
+        iconColor,
+        bDisplay
+      ) {
+        mapObj.loadImage(iconPath, (error, image) => {
+          if (error) throw error;
+          mapObj.addImage(iconName, image);
+          mapObj.addSource(sourceName, {
+            type: "geojson",
+            // Use a URL for the value for the `data` property.
+            // data: 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson'
+            data: sourceData,
+          });
+
+          mapObj.addLayer({
+            id: layerName,
+            type: "symbol",
+            source: sourceName,
+            layout: {
+              "icon-image": iconName,
+              "icon-size": ICON_SIZE,
+              "icon-anchor": iconAnchor,
+              "icon-allow-overlap": true,
+              visibility: bDisplay,
+            },
+          });
+        });
+      }
+
+      //  the initialization process
+      function init() {
+        mapboxgl.accessToken = ACCESS_TOKEN;
+        map = new mapboxgl.Map({
+          container: "map", // container ID
+          // style: "mapbox://styles/mapbox/satellite-streets-v12", // style URL
+          // style: "mapbox://styles/mapbox/streets-v12", // style URL
+          style: "mapbox://styles/beatricemalorni/clofqr6he005g01qrc93u1uar",
+          projection: "globe", // Display the map as a globe, since satellite-v9 defaults to Mercator
+          zoom: 2, // starting zoom
+          center: [108, 4], // // starting center in [lng, lat]
+        });
+        fleets = fleets.sort(
+          (prev, next) =>
+            next["CO2 emitted (tons)"] - prev["CO2 emitted (tons)"]
+        );
+        const criteriaVal = fleets[20]["CO2 emitted (tons)"];
+        topFleets = fleets.filter(
+          (one) => one["CO2 emitted (tons)"] >= criteriaVal
+        );
+        regularFleets = fleets.filter(
+          (one) => one["CO2 emitted (tons)"] < criteriaVal
+        );
+        displayFleetsLevels(topFleets, regularFleets);
+        let topFleetFeatures = topFleets.map((one) => {
+          if (
+            !one ||
+            isNaN(Number(one["Latitude"])) ||
+            isNaN(Number(one["Longitude"]))
+          ) {
+            return;
+          }
+          if (one) {
+            const graphData = graph.filter(
+              (each) => each["Office Building"] == one["Office (Building code)"]
+            );
+            return {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [one["Longitude"], one["Latitude"]],
+              },
+              properties: {
+                ...one,
+                ...graphData[0],
+              },
+            };
+          }
+        });
+        topFleetFeatures = topFleetFeatures.filter((one) => one != undefined);
+        const topFleetsData = {
+          type: "FeatureCollection",
+          crs: {
+            type: "name",
+            properties: {
+              name: "urn:ogc:def:crs:OGC:1.3:CRS84",
+            },
+          },
+          features: topFleetFeatures,
+        };
+
+        let regularFleetFeatures = regularFleets.map((one) => {
+          if (
+            !one ||
+            isNaN(Number(one["Latitude"])) ||
+            isNaN(Number(one["Longitude"]))
+          ) {
+            return;
+          }
+          if (one) {
+            const graphData = graph.filter(
+              (each) => each["Office Building"] == one["Office (Building code)"]
+            );
+            return {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [one["Longitude"], one["Latitude"]],
+              },
+              properties: {
+                ...one,
+                ...graphData[0],
+              },
+            };
+          }
+        });
+        regularFleetFeatures = regularFleetFeatures.filter(
+          (one) => one != undefined
+        );
+        const regularFleetsData = {
+          type: "FeatureCollection",
+          crs: {
+            type: "name",
+            properties: {
+              name: "urn:ogc:def:crs:OGC:1.3:CRS84",
+            },
+          },
+          features: regularFleetFeatures,
+        };
+
+        map.on("style.load", () => {
+          // map.setFog({}); // Set the default atmosphere style
+        });
+
+        map.on("load", () => {
+          insertLayer(
+            map,
+            "top-fleets",
+            topFleetsData,
+            "top-fleets",
+            "top-fleets",
+            "./assets/icons/car_yellow.png",
+            "center",
+            "#00FF00",
+            "visible"
+          );
+          insertLayer(
+            map,
+            "regular-fleets",
+            regularFleetsData,
+            "regular-fleets",
+            "regular-fleets",
+            "./assets/icons/car.png",
+            "center",
+            "#00FF00",
+            "visible"
+          );
+
+          spinGlobe();
+        });
+
+        map.on("click", (event) => {
+          console.log(event);
+          const point = event.point;
+          const features = map.queryRenderedFeatures(
+            [
+              [point.x - 5, point.y - 5],
+              [point.x + 10, point.y + 10],
+            ],
+            {
+              layers: ["regular-fleets", "top-fleets"],
+            }
+          );
+          console.log(features);
+
+          if (!features.length) {
+            // map.setFilter('routes-fill', [
+            //     '==', 'no', '-1'
+            // ]);
+            return;
+          }
+
+          addPopup(features[0].layer.id, features[0].properties, event.lngLat);
+          // if(features[0].layer.id == "fleets" || features[0].layer.id == "routes-highlight" ) {
+          //   map.setFilter('routes-fill', [
+          //     '==', 'no', features[0].properties["no"]
+          //   ])
+          // }
+          changeDisplayData(features[0].properties);
+
+          // const feature = features[0];
+          // console.log(feature);
+          // addPopup(feature.properties);
+        });
+
+        map.flyTo({
+          essential: true, // this animation is considered essential with respect to prefers-reduced-motion
+          zoom: INITIAL_ZOOM,
+        });
+
+        displayTotalValues();
+      }
+
+      // handle the zoomin button click
+      function doZoomIn() {
+        map.zoomIn();
+      }
+
+      // handle the zoomout button click
+      function doZoomOut() {
+        map.zoomOut();
+      }
+
+      function flyHome() {
+        if (currentPopup) currentPopup.remove();
+        spinEnabled = true;
+        map.flyTo({
+          center: HOME_POSITION,
+          essential: true, // this animation is considered essential with respect to prefers-reduced-motion
+          zoom: INITIAL_ZOOM,
+        });
+        $("#view-fleet-search-input").val("");
+        if (!$("#toggle-layers-view-card").hasClass("d-none"))
+          $("#view-toggle-layer-btn").click();
+        $("#ui-id-1").hide();
+        $("#top-fleets-view-card").addClass("d-none");
+        $("#regular-fleets-view-card").addClass("d-none");
+        displayTotalValues();
+        initViewLayers();
+        // init_chart(classes[classes.length - 1]);
+        // $("#btn-spin").click();
+      }
+
+      function addPopup(layerId, pointFeature, clickedPosition) {
+        let popupHtml = ``;
+        // const nFlights = isNaN(Number(pointFeature["Total KWH"])) ? "" : parseFloat(pointFeature["Total KWH"]).toLocaleString();
+        const location = pointFeature["Location"];
+        const vehicles = isNaN(Number(pointFeature["# vehicles"]))
+          ? " 0 "
+          : Number(pointFeature["# vehicles"]).toLocaleString();
+        const co2 = isNaN(Number(pointFeature["Fleet Emissions t CO2"]))
+          ? " 0 "
+          : Number(pointFeature["Fleet Emissions t CO2"]).toLocaleString();
+        const electricVehicles = isNaN(
+          Number(pointFeature["# hybrid/Electric vehicles"])
+        )
+          ? " 0 "
+          : Number(pointFeature["# hybrid/Electric vehicles"]).toLocaleString();
+        let contentDomStr = "";
+        let imageFileUrl = `assets/img/UNHCRcar.png`;
+        contentDomStr = `<div class="card" style="border-radius:unset !important"><div class="card-header bg-popup-cyan p-2 pl-3" style="border-radius:unset !important"><a class="card-link text-white d-flex justify-content-between">Fleet<i class="bi bi-chevron-down fs-4"></i></a></div><div id="collapseGreenBoxes"><div class="card-body p-0"><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-6"> Location </div><div class="col-sm-6">${location}</div></div><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-6">CO<sub>2</sub> emitted (tonnes) </div><div class="col-sm-6">${co2}</div></div></div></div></div>`;
+        popupHtml = `<div class="card bg-map-dark" style="width: 250px;"><div class="card-header pb-0 border-0"><strong> Fleet </strong><p class="mb-0" style="color: yellow;"></p></div><div class="card-body text-center p-0"><div class="row bg-map-green mx-0 text-left"><div class="col-sm-6">Location</div><div class="col-sm-6">${location}</div></div><div id="demo" class="carousel slide w-100" data-ride="carousel"  ><!-- Indicators --><!-- The slideshow --><div class="carousel-inner"><div class="carousel-item active"><img src="${imageFileUrl}" style="max-height:200px;width:100%;object-fit:cover;"></div></div><!-- Left and right controls --></div></div><div class="row mx-0 text-left"><div class="col-sm-6"> Number of vehicles </div><div class="col-sm-6">${vehicles}</div></div><div class="row bg-map-green mx-0 text-left"><div class="col-sm-6"> Number of electric vehicle </div><div class="col-sm-6">${electricVehicles}</div></div><div class="row mx-0 p-0"></div></div>`;
+        currentPopup = new mapboxgl.Popup()
+          .setLngLat([pointFeature["Longitude"], pointFeature["Latitude"]])
+          .setHTML(popupHtml)
+          .addTo(map);
+        if (curOfficeCode == pointFeature["Office (Building code)"]) return;
+        curOfficeCode = pointFeature["Office (Building code)"];
+      }
+
+      function displayTotalValues() {
+        co2Dom.html(convertNumbersToFixed(totalCO2, 2).toLocaleString());
+        kmDom.html(convertNumbersToFixed(totalKm, 2).toLocaleString());
+        numberFleetDom.html(
+          convertNumbersToFixed(totalFleet, 2).toLocaleString()
+        );
+      }
+
+      function changeDisplayData(prop) {
+        let co2 = prop["CO2 emitted (tons)"];
+        co2 = isNaN(Number(co2)) ? 0 : Number(co2);
+        let km = prop["Km travelled"];
+        km = isNaN(Number(km)) ? 0 : Number(km);
+        let fleet = prop["# vehicles"];
+        fleet = isNaN(Number(fleet)) ? 0 : Number(fleet);
+        co2Dom.html(convertNumbersToFixed(co2, 2).toLocaleString());
+        kmDom.html(convertNumbersToFixed(km, 2).toLocaleString());
+        numberFleetDom.html(convertNumbersToFixed(fleet, 2).toLocaleString());
+        init_fleet_chart({
+          "Large car > 2800 CC ": prop["Large car > 2800 CC "],
+          "Medium/Small car < 2800 CC ": prop["Medium/Small car < 2800 CC "],
+        });
+      }
+
+      function initViewLayers() {
+        // if($("#toggle-fleet-btn i").hasClass("bi-eye")) {
+        //   $("#toggle-fleet-btn i").click()
+        // }
+      }
+
+      function displayTopTicketFlights(top, regular) {
+        const topDom = $("#top-flights-view-card tbody");
+        let domStr = "";
+        for (const one of top) {
+          domStr += `<tr><td>${one["Original City"]}</td><td>${
+            one["Destination city"]
+          }</td><td>${one["Sum of NB OF TICKETS"].toLocaleString()}</td></tr>`;
+        }
+        topDom.append(domStr);
+        domStr = "";
+        const regularDom = $("#regular-flights-view-card tbody");
+        for (const one of regular) {
+          domStr += `<tr><td>${one["Original City"]}</td><td>${
+            one["Destination city"]
+          }</td><td>${one["Sum of NB OF TICKETS"].toLocaleString()}</td></tr>`;
+        }
+        regularDom.append(domStr);
+      }
+
+      function displayFleetsLevels(top, regular) {
+        const topDom = $("#top-fleets-view-card tbody");
+        let domStr = "";
+        for (let one of top) {
+          domStr += `<tr><td>${one["Location"]}</td><td>${one[
+            "CO2 emitted (tons)"
+          ].toLocaleString()}</td></tr>`;
+        }
+        topDom.append(domStr);
+        domStr = "";
+        const regularDom = $("#regular-fleets-view-card tbody");
+        for (let one of regular) {
+          domStr += `<tr><td>${one["Location"]}</td><td>${one[
+            "CO2 emitted (tons)"
+          ].toLocaleString()}</td></tr>`;
+        }
+        regularDom.append(domStr);
+      }
+    </script>
+    <script src="./assets/js/rotation.js"></script>
+    <script src="./assets/js/init_autocomplete.js"></script>
+    <script src="./assets/js/common.js"></script>
+  </body>
+</html>
