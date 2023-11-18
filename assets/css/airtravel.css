@@ -21,11 +21,6 @@
     margin-left: 10%;
     margin-right: 10%;  
 }
-#footer-text {
-    position:absolute;
-    bottom: 0px;
-    left: calc(50vw - 220px);
-}
 
 @media (max-width: 1480px) {
     #footer-text {
@@ -68,4 +63,7 @@
 }
 #left-title span {
     line-height: normal;
+}
+#footer-text {
+    left: calc(50vw - 340px);
 }

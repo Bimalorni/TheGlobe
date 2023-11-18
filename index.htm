@@ -284,6 +284,11 @@
         ><i class="bi bi-link-45deg fs-4 mx-2"></i> ... Much More
       </a>
     </div>
+    <div id="footer-text">
+      <p class="text-white fs-11px">
+        Data Source: Greening the Blue 2023 report
+      </p>
+    </div>
     <div id="left-title">
       <span class="text-white fs-2 fw-600"
         >UNHCR offices' Environmental Footprint</span
@@ -1189,14 +1194,24 @@
                 Number(pointFeature["Waste generated KG"]),
                 2
               ).toLocaleString();
-
+        const co2 =
+          Number(pointFeature["CO2 Tons (office only)"]) == 0
+            ? " N/A "
+            : convertNumbersToFixed(
+                Number(pointFeature["CO2 Tons (office only)"]),
+                2
+              ).toLocaleString();
         let greenBoxDomStr =
           pointFeature["Greenboxes"] == "Yes"
-            ? `<div class="card" style="border-radius:unset !important"><div class="card-header bg-popup-cyan p-1 pl-3" style="border-radius:unset !important"><a class="card-link text-white d-flex justify-content-between" data-toggle="collapse" href="#collapseGreenBoxes">Green Boxes<i class="bi bi-chevron-down fs-4"></i></a></div><div id="collapseGreenBoxes" class="collapse" data-parent="#accordion"><div class="card-body p-0"><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-6">Total KWh in 2022</div><div class="col-sm-6">${kwh}</div></div></div></div></div>`
+            ? `<div class="card" style="border-radius:unset !important"><div class="card-header bg-popup-cyan p-1 pl-3" style="border-radius:unset !important"><a class="card-link text-white d-flex justify-content-between" data-toggle="collapse" href="#collapseGreenBoxes">Green Boxes<i class="bi bi-chevron-down fs-4"></i></a></div><div id="collapseGreenBoxes" class="collapse" data-parent="#accordion"><div class="card-body p-0"><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-7">Total KWh in 2022</div><div class="col-sm-5">${kwh}</div></div></div></div></div>`
             : "";
-        let greeingBlueDomStr =
+        // let greeingBlueDomStr =
+        //   pointFeature["Greening the Blue 2023"] == "Yes"
+        //     ? `<div class="card bg-popup-grey" style="border-radius:unset !important"><div class="card-header bg-popup-cyan p-1 pl-3" style="border-radius:unset !important"><a class="card-link text-white d-flex justify-content-between" data-toggle="collapse" href="#collapseGreeningBlue"><span>Offices CO<sub>2</sub> emissions</span><i class="bi bi-chevron-down fs-4"></i></a></div><div id="collapseGreeningBlue" class="collapse" data-parent="#accordion"><div class="card-body p-0"><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-7">Water Used(m<sub>3</sub>)</div><div class="col-sm-5">${wastingWater}</div></div><div class="row bg-popup-blue mx-0 text-left"><div class="col-sm-7">Water recycled(m<sub>3</sub>)</div><div class="col-sm-5">${recycledWater}</div></div><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-7">Waste generated(Kg)</div><div class="col-sm-5">${generatedWaste}</div></div></div></div></div>`
+        //     : "";
+        let co2EmissionDomStr =
           pointFeature["Greening the Blue 2023"] == "Yes"
-            ? `<div class="card bg-popup-grey" style="border-radius:unset !important"><div class="card-header bg-popup-cyan p-1 pl-3" style="border-radius:unset !important"><a class="card-link text-white d-flex justify-content-between" data-toggle="collapse" href="#collapseGreeningBlue">Greening the Blue<i class="bi bi-chevron-down fs-4"></i></a></div><div id="collapseGreeningBlue" class="collapse" data-parent="#accordion"><div class="card-body p-0"><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-7">Water Used(m<sub>3</sub>)</div><div class="col-sm-5">${wastingWater}</div></div><div class="row bg-popup-blue mx-0 text-left"><div class="col-sm-7">Water recycled(m<sub>3</sub>)</div><div class="col-sm-5">${recycledWater}</div></div><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-7">Waste generated(Kg)</div><div class="col-sm-5">${generatedWaste}</div></div></div></div></div>`
+            ? `<div class="card bg-popup-grey" style="border-radius:unset !important"><div class="card-header bg-popup-cyan p-1 pl-3" style="border-radius:unset !important"><a class="card-link text-white d-flex justify-content-between" data-toggle="collapse" href="#collapseGreeningBlue"><span>Offices CO<sub>2</sub> emissions</span><i class="bi bi-chevron-down fs-4"></i></a></div><div id="collapseGreeningBlue" class="collapse" data-parent="#accordion"><div class="card-body p-0"><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-8">CO<sub>2</sub> tons (office only)</div><div class="col-sm-4">${wastingWater}</div></div></div></div></div>`
             : "";
         let imageFileUrl = `assets/img/offices/${pointFeature["Office (Building code)"]}.jpg`;
         let gross =
@@ -1218,7 +1233,7 @@
           }</div></div><div class="row bg-map-green mx-0 text-left"><div class="col-sm-6">Country</div><div class="col-sm-6">${
             pointFeature["Country Name"]
           }</div></div><div class="row mx-0 text-left"><div class="col-sm-6">Gross Area(m<sup>2</sup>)</div><div class="col-sm-6">${gross}</div></div><div class="row bg-map-green mx-0 text-left"><div class="col-sm-6">Number of staff</div><div class="col-sm-6">${staff}</div></div><div class="row mx-0 p-0"><div id="demo" class="carousel slide w-100" data-ride="carousel"  ><!-- Indicators --><!-- The slideshow --><div class="carousel-inner"><div class="carousel-item active"><img src="${img}" style="max-height:120px;width:100%;object-fit:cover;"></div></div><!-- Left and right controls --></div></div>${
-            greenBoxDomStr + greeingBlueDomStr
+            greenBoxDomStr + co2EmissionDomStr
           }</div></div>`;
           currentPopup = new mapboxgl.Popup()
             .setLngLat([pointFeature["Longitude"], pointFeature["Latitude"]])

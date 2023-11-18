@@ -330,26 +330,23 @@
 #view-regular-emission-offices-card-btn i {
 	color: #0EB1FF
 }
-table {
-    display: flex;
-    flex-flow: column;
-    width: 100%;
+#footer-text {
+    position:absolute;
+    bottom: 0px;
+    left: calc(50vw - 220px);
 }
 
-thead {
-    flex: 0 0 auto;
+@media only screen and (max-width: 1250px) {
+	#footer-text {
+	  bottom: 30px !important
+	}
+}
+@media only screen and (max-width: 950px) {
+	#footer-text {
+	  display: none !important
+	}
+	#bottom-left-buttons-wrapper-div {
+		bottom: 45px
+	}
 }
 
-tbody {
-    flex: 1 1 auto;
-    display: block;
-    overflow-y: auto;
-    overflow-x: hidden;
-	max-height: 300px;
-}
-
-tr {
-    width: 100%;
-    display: table;
-    table-layout: fixed;
-}

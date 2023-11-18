@@ -247,13 +247,13 @@
     <div id="bottom-left-buttons-wrapper-div" class="">
       <a
         href="index.htm"
-        class="btn btn-outline-blue d-flex align-items-center my-1 w-100 p-0"
+        class="btn btn-outline-blue d-flex align-items-center my-1 w-100 p-0 active"
         target="_self"
         ><i class="bi bi-link-45deg fs-4 mx-2"></i> Offices
       </a>
       <a
         href="airtravel.htm"
-        class="btn btn-outline-blue d-flex align-items-center my-1 w-100 p-0"
+        class="btn btn-outline-blue d-flex align-items-center my-1 w-100 p-0 active"
         target="_self"
         ><i class="bi bi-link-45deg fs-4 mx-2"></i> Air travel
       </a>
@@ -459,7 +459,9 @@
       </div>
     </div>
     <div id="footer-text">
-      <p class="text-white fs-6">UNHCR as a custodian</p>
+      <p class="text-white fs-6">
+        Data Source: VTS 2022’ data extraction, UNHCR as a custodian
+      </p>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -553,9 +555,9 @@
               const co2 = isNaN(Number(one["CO2 emitted (tons)"]))
                 ? 0
                 : Number(one["CO2 emitted (tons)"]);
-              const fleet = isNaN(Number(one["# vehicles"]))
+              const fleet = isNaN(Number(one["Number of vehicles"]))
                 ? 0
-                : Number(one["# vehicles"]);
+                : Number(one["Number of vehicles"]);
 
               totalKm += km;
               totalCO2 += co2;
@@ -913,22 +915,22 @@
       function addPopup(layerId, pointFeature, clickedPosition) {
         let popupHtml = ``;
         // const nFlights = isNaN(Number(pointFeature["Total KWH"])) ? "" : parseFloat(pointFeature["Total KWH"]).toLocaleString();
-        const location = pointFeature["Location"];
-        const vehicles = isNaN(Number(pointFeature["# vehicles"]))
+        const location = pointFeature["Location Name"];
+        const vehicles = isNaN(Number(pointFeature["Number of vehicles"]))
           ? " 0 "
-          : Number(pointFeature["# vehicles"]).toLocaleString();
+          : Number(pointFeature["Number of vehicles"]).toLocaleString();
         const co2 = isNaN(Number(pointFeature["Fleet Emissions t CO2"]))
           ? " 0 "
           : Number(pointFeature["Fleet Emissions t CO2"]).toLocaleString();
         const electricVehicles = isNaN(
-          Number(pointFeature["# hybrid/Electric vehicles"])
+          Number(pointFeature["# hybrid/electric vehicles"])
         )
           ? " 0 "
-          : Number(pointFeature["# hybrid/Electric vehicles"]).toLocaleString();
+          : Number(pointFeature["# hybrid/electric vehicles"]).toLocaleString();
         let contentDomStr = "";
         let imageFileUrl = `assets/img/UNHCRcar.png`;
-        contentDomStr = `<div class="card" style="border-radius:unset !important"><div class="card-header bg-popup-cyan p-2 pl-3" style="border-radius:unset !important"><a class="card-link text-white d-flex justify-content-between">Fleet<i class="bi bi-chevron-down fs-4"></i></a></div><div id="collapseGreenBoxes"><div class="card-body p-0"><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-6"> Location </div><div class="col-sm-6">${location}</div></div><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-6">CO<sub>2</sub> emitted (tonnes) </div><div class="col-sm-6">${co2}</div></div></div></div></div>`;
-        popupHtml = `<div class="card bg-map-dark" style="width: 250px;"><div class="card-header pb-0 border-0"><strong> Fleet </strong><p class="mb-0" style="color: yellow;"></p></div><div class="card-body text-center p-0"><div class="row bg-map-green mx-0 text-left"><div class="col-sm-6">Location</div><div class="col-sm-6">${location}</div></div><div id="demo" class="carousel slide w-100" data-ride="carousel"  ><!-- Indicators --><!-- The slideshow --><div class="carousel-inner"><div class="carousel-item active"><img src="${imageFileUrl}" style="max-height:200px;width:100%;object-fit:cover;"></div></div><!-- Left and right controls --></div></div><div class="row mx-0 text-left"><div class="col-sm-6"> Number of vehicles </div><div class="col-sm-6">${vehicles}</div></div><div class="row bg-map-green mx-0 text-left"><div class="col-sm-6"> Number of electric vehicle </div><div class="col-sm-6">${electricVehicles}</div></div><div class="row mx-0 p-0"></div></div>`;
+        contentDomStr = `<div class="card" style="border-radius:unset !important"><div class="card-header bg-popup-cyan p-2 pl-3" style="border-radius:unset !important"><a class="card-link text-white d-flex justify-content-between">Fleet<i class="bi bi-chevron-down fs-4"></i></a></div><div id="collapseGreenBoxes"><div class="card-body p-0"><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-4"> Location </div><div class="col-sm-8">${location}</div></div><div class="row bg-popup-grey mx-0 text-left"><div class="col-sm-9">CO<sub>2</sub> emitted (tonnes) </div><div class="col-sm-3">${co2}</div></div></div></div></div>`;
+        popupHtml = `<div class="card bg-map-dark" style="width: 250px;"><div class="card-header pb-0 border-0"><strong> Fleet </strong><p class="mb-0" style="color: yellow;"></p></div><div class="card-body text-center p-0"><div class="row bg-map-green mx-0 text-left"><div class="col-sm-6">Location</div><div class="col-sm-6">${location}</div></div><div id="demo" class="carousel slide w-100" data-ride="carousel"  ><!-- Indicators --><!-- The slideshow --><div class="carousel-inner"><div class="carousel-item active"><img src="${imageFileUrl}" style="max-height:200px;width:100%;object-fit:cover;"></div></div><!-- Left and right controls --></div></div><div class="row mx-0 text-left"><div class="col-sm-9"> Number of vehicles </div><div class="col-sm-3">${vehicles}</div></div><div class="row bg-map-green mx-0 text-left"><div class="col-sm-9"> Number of electric vehicle </div><div class="col-sm-3">${electricVehicles}</div></div><div class="row mx-0 p-0"></div></div>`;
         currentPopup = new mapboxgl.Popup()
           .setLngLat([pointFeature["Longitude"], pointFeature["Latitude"]])
           .setHTML(popupHtml)
@@ -950,7 +952,7 @@
         co2 = isNaN(Number(co2)) ? 0 : Number(co2);
         let km = prop["Km travelled"];
         km = isNaN(Number(km)) ? 0 : Number(km);
-        let fleet = prop["# vehicles"];
+        let fleet = prop["Number of vehicles"];
         fleet = isNaN(Number(fleet)) ? 0 : Number(fleet);
         co2Dom.html(convertNumbersToFixed(co2, 2).toLocaleString());
         kmDom.html(convertNumbersToFixed(km, 2).toLocaleString());
@@ -990,7 +992,7 @@
         const topDom = $("#top-fleets-view-card tbody");
         let domStr = "";
         for (let one of top) {
-          domStr += `<tr><td>${one["Location"]}</td><td>${one[
+          domStr += `<tr><td>${one["Location Name"]}</td><td>${one[
             "CO2 emitted (tons)"
           ].toLocaleString()}</td></tr>`;
         }
@@ -998,7 +1000,7 @@
         domStr = "";
         const regularDom = $("#regular-fleets-view-card tbody");
         for (let one of regular) {
-          domStr += `<tr><td>${one["Location"]}</td><td>${one[
+          domStr += `<tr><td>${one["Location Name"]}</td><td>${one[
             "CO2 emitted (tons)"
           ].toLocaleString()}</td></tr>`;
         }

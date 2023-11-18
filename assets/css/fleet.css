@@ -9,12 +9,6 @@
 .canvasjs-chart-credit {
     display: none;
 }
-#footer-text {
-    position:absolute;
-    bottom: 0px;
-    left: calc(50vw - 220px);
-}
-
 #top-fleets-view-card {
 	border-radius: 0;
 	position: absolute;
@@ -35,4 +29,8 @@
 }
 #view-regular-fleets-card-btn i {
 	color: #0EB1FF
+}
+#footer-text {
+    left: calc(50vw - 300px);
+
 }
