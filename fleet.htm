@@ -992,17 +992,23 @@
         const topDom = $("#top-fleets-view-card tbody");
         let domStr = "";
         for (let one of top) {
-          domStr += `<tr><td>${one["Location Name"]}</td><td>${one[
-            "CO2 emitted (tons)"
-          ].toLocaleString()}</td></tr>`;
+          domStr += `<tr><td>${
+            one["Location Name"]
+          }</td><td>${convertNumbersToFixed(
+            one["CO2 emitted (tons)"],
+            2
+          ).toLocaleString()}</td></tr>`;
         }
         topDom.append(domStr);
         domStr = "";
         const regularDom = $("#regular-fleets-view-card tbody");
         for (let one of regular) {
-          domStr += `<tr><td>${one["Location Name"]}</td><td>${one[
-            "CO2 emitted (tons)"
-          ].toLocaleString()}</td></tr>`;
+          domStr += `<tr><td>${
+            one["Location Name"]
+          }</td><td>${convertNumbersToFixed(
+            one["CO2 emitted (tons)"],
+            2
+          ).toLocaleString()}</td></tr>`;
         }
         regularDom.append(domStr);
       }

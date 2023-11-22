@@ -313,8 +313,8 @@
         <div class="container tableFixHead px-1">
           <table class="table">
             <thead>
-              <th>Location</th>
-              <th>Total CO2 (tons)</th>
+              <th width="30%">Location</th>
+              <th>CO2 Tons (office only)</th>
             </thead>
             <tbody></tbody>
           </table>
@@ -355,8 +355,8 @@
         <div class="container tableFixHead px-1">
           <table class="table">
             <thead>
-              <th width="33%">Location</th>
-              <th width="33%">Total CO2 (tons)</th>
+              <th width="30%">Location</th>
+              <th>CO2 Tons (office only)</th>
             </thead>
             <tbody></tbody>
           </table>
@@ -871,9 +871,10 @@
       //  the initialization process
       function init() {
         sortedOffices = locations.sort(
-          (prev, next) => next["Total CO2 (tons)"] - prev["Total CO2 (tons)"]
+          (prev, next) =>
+            next["CO2 Tons (office only)"] - prev["CO2 Tons (office only)"]
         );
-        criteriaCO2Qnt = sortedOffices[21]["Total CO2 (tons)"];
+        criteriaCO2Qnt = sortedOffices[21]["CO2 Tons (office only)"];
         let officeFeatures = locations.map((one) => {
           if (
             !one ||
@@ -892,7 +893,7 @@
               properties: {
                 ...one,
                 color:
-                  one["Total CO2 (tons)"] >= criteriaCO2Qnt
+                  one["CO2 Tons (office only)"] >= criteriaCO2Qnt
                     ? "#faeb00"
                     : "#007bb6",
               },
@@ -920,16 +921,18 @@
         const greeningBlueData = { ...officesData, features: greenBoxFeatures };
 
         topEmissionOffices = locations.filter(
-          (one) => one["Total CO2 (tons)"] >= criteriaCO2Qnt
+          (one) => one["CO2 Tons (office only)"] >= criteriaCO2Qnt
         );
         topEmissionOffices.sort(
-          (prev, next) => next["Total CO2 (tons)"] - prev["Total CO2 (tons)"]
+          (prev, next) =>
+            next["CO2 Tons (office only)"] - prev["CO2 Tons (office only)"]
         );
         regularEmissionOffices = locations.filter(
-          (one) => one["Total CO2 (tons)"] < criteriaCO2Qnt
+          (one) => one["CO2 Tons (office only)"] < criteriaCO2Qnt
         );
         regularEmissionOffices.sort(
-          (prev, next) => next["Total CO2 (tons)"] - prev["Total CO2 (tons)"]
+          (prev, next) =>
+            next["CO2 Tons (office only)"] - prev["CO2 Tons (office only)"]
         );
         let topOfficesFeatures = topEmissionOffices.map((one) => {
           if (
@@ -1297,18 +1300,24 @@
         let domStr = "";
         for (let one of top) {
           one = one["properties"];
-          domStr += `<tr><td>${one["Location Name"]}</td><td>${one[
-            "Total CO2 (tons)"
-          ].toLocaleString()}</td></tr>`;
+          domStr += `<tr><td>${
+            one["Location Name"]
+          }</td><td>${convertNumbersToFixed(
+            one["CO2 Tons (office only)"],
+            2
+          ).toLocaleString()}</td></tr>`;
         }
         topDom.append(domStr);
         domStr = "";
         const regularDom = $("#regular-emission-offices-view-card tbody");
         for (let one of regular) {
           one = one["properties"];
-          domStr += `<tr><td>${one["Location Name"]}</td><td>${one[
-            "Total CO2 (tons)"
-          ].toLocaleString()}</td></tr>`;
+          domStr += `<tr><td>${
+            one["Location Name"]
+          }</td><td>${convertNumbersToFixed(
+            one["CO2 Tons (office only)"],
+            2
+          ).toLocaleString()}</td></tr>`;
         }
         regularDom.append(domStr);
       }
